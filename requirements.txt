@@ -142,3 +142,6 @@ watchfiles==1.2.0
 websockets==16.0
 xxhash==3.7.0
 zstandard==0.25.0
+llama-index==0.14.7
+llama-index-readers-file==0.5.4
+qdrant-client==1.15.1

@@ -73,7 +73,7 @@ openai==2.38.0
 orjson==3.11.9
 ormsgpack==1.12.2
 packaging==26.1
-pandas==3.0.2
+pandas==2.2.3
 pillow==12.2.0
 pipenv==2026.6.1
 platformdirs==4.9.6

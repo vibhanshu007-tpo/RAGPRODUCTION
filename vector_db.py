@@ -1,0 +1,54 @@
+# from Demos.c_extension.setup import sources
+from aiohttp import payload
+import os
+from qdrant_client import QdrantClient
+from qdrant_client.models import VectorParams, Distance, PointStruct
+from sqlalchemy.orm.collections import collection
+
+
+class QdrantStorage:
+    def __init__(self, collection="docs", dim=384):
+        self.client = QdrantClient(
+            url=os.getenv("QDRANT_URL"),
+            api_key = os.getenv("QDRANT_API_KEY"),
+            timeout=30)
+        self.collection = collection
+        if not self.client.collection_exists(self.collection):
+            self.client.create_collection(
+                collection_name=self.collection,
+                vectors_config=VectorParams(size=dim, distance=Distance.COSINE),
+
+    )
+
+    def upsert(self, ids, vector, payloads):
+        points = [PointStruct(id=ids[i], vector=vector[i], payload=payloads[i]) for i in range(len(ids))]
+        self.client.upsert(
+            collection_name = self.collection,
+            points = points
+        )
+
+    def search(self, query_vector, top_k, ini=5):
+        results = self.client.query_points(
+            collection_name=self.collection,
+            query=query_vector,
+            with_payload=True,
+            limit=top_k
+        ).points
+
+        contexts=[]
+        sources=set()
+
+        for i in results:
+            payloads = getattr(i, "payload", None) or {}
+            text = payloads.get("text", "")
+            source = payloads.get("source_id", "")
+            if text:
+                contexts.append(text)
+                sources.add(source)
+
+
+        return {"contexts": contexts, "sources": list(sources)}
+
+
+
+# url="http://localhost:6333"

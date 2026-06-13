@@ -104,6 +104,7 @@ rich==15.0.0
 rich-toolkit==0.19.9
 rignore==0.7.6
 rpds-py==0.30.0
+qdrant-client==1.12.2
 safetensors==0.7.0
 scikit-learn==1.9.0
 scipy==1.17.1
@@ -144,4 +145,3 @@ xxhash==3.7.0
 zstandard==0.25.0
 llama-index==0.14.7
 llama-index-readers-file==0.5.4
-qdrant-client==1.15.1

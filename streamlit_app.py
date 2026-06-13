@@ -74,7 +74,8 @@ async def send_rag_query_event(question: str, top_k: int) -> None:
 
 def _inngest_api_base() -> str:
     # Local dev server default; configurable via env
-    return os.getenv("INNGEST_API_BASE", "http://127.0.0.1:8288/v1")
+    return os.getenv("INNGEST_API_BASE", "https://ragproduction-cynk.onrender.com/v1")
+    # "http://127.0.0.1:8288/v1"
 
 
 def fetch_runs(event_id: str) -> list[dict]:

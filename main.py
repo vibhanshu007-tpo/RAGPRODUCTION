@@ -1,4 +1,33 @@
 from fastapi import FastAPI
+print("STEP 1")
+
+from fastapi import FastAPI
+
+print("STEP 2")
+
+from agents.rag_agent import rag_query_pdf_ai
+
+print("STEP 3")
+
+from agents.ingest import rag_ingest_pdf
+
+print("STEP 4")
+
+from config.inngest_client import inngest_client
+
+print("STEP 5")
+
+app = FastAPI()
+
+print("STEP 6")
+
+inngest.fast_api.serve(
+    app,
+    inngest_client,
+    [rag_ingest_pdf, rag_query_pdf_ai]
+)
+
+print("STEP 7")
 
 app = FastAPI()
 
